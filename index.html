@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <!--
   Emilio Siciliano — personal research page.
-  Single file, no build step. Publish by dropping index.html, photo.jpg and cv.pdf
-  into a GitHub repository and enabling Pages.
+  Single file, no build step. index.html, photo.jpg and cv.pdf live side by side.
 
   To add a paper, see the commented markup pattern inside the "Academic work" section.
 -->
@@ -15,19 +14,20 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --paper:      #f4f5f1;
-    --ink:        #18231f;
-    --ink-soft:   #5a655e;
-    --rule:       #d5d9cf;
-    --link:       #1d5561;
-    --wash:       #eaece4;
+    --paper:      #f7f4f3;
+    --ink:        #2a1d20;
+    --ink-soft:   #6d5a5c;
+    --rule:       #ded1d1;
+    --wine:       #7b2436;
+    --wine-deep:  #5d1a29;
+    --wash:       #efe7e6;
 
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
-    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mark-opacity: .06;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -47,10 +47,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  a { color: var(--link); text-decoration: none; border-bottom: 1px solid rgba(29,85,97,.3); }
-  a:hover { border-bottom-color: var(--link); }
+  a { color: var(--wine); text-decoration: none; border-bottom: 1px solid rgba(123,36,54,.28); }
+  a:hover { color: var(--wine-deep); border-bottom-color: var(--wine-deep); }
   a:focus-visible {
-    outline: 2px solid var(--link);
+    outline: 2px solid var(--wine);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -58,12 +58,14 @@
   /* ---------- shell ---------- */
 
   .shell {
-    max-width: 1080px;
+    position: relative;
+    z-index: 1;
+    max-width: 1060px;
     margin: 0 auto;
     padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.25rem, 5vw, 3rem);
     display: grid;
     grid-template-columns: 15rem 1fr;
-    gap: clamp(2rem, 6vw, 5rem);
+    gap: clamp(1.5rem, 4vw, 3rem);
     align-items: start;
   }
 
@@ -73,92 +75,112 @@
 
   .portrait {
     display: block;
-    width: 8.5rem;
+    width: 9rem;
     height: auto;
-    margin-bottom: 1.1rem;
-    filter: saturate(.92);
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--rule);
+    filter: saturate(.9);
   }
 
   .identity-name {
-    font-family: var(--serif);
     font-weight: 400;
-    font-size: 1.9rem;
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    margin: 0 0 .4rem;
+    font-size: 2.3rem;
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    margin: 0 0 .5rem;
   }
 
   .identity-role {
-    font-family: var(--sans);
-    font-size: .875rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.45;
     color: var(--ink-soft);
-    margin: 0 0 2rem;
+    margin: 0 0 1.4rem;
+  }
+
+  .flourish {
+    display: block;
+    width: 3.75rem;
+    height: auto;
+    fill: var(--wine);
+    margin-bottom: 1.4rem;
   }
 
   .identity nav ul,
   .contact ul { list-style: none; margin: 0; padding: 0; }
 
-  .identity nav {
-    border-top: 1px solid var(--rule);
-    padding-top: .9rem;
-    margin-bottom: 2rem;
-  }
+  .identity nav { margin-bottom: 1.8rem; }
 
   .identity nav a {
-    font-family: var(--sans);
-    font-size: .9375rem;
+    font-size: 1rem;
     display: block;
-    padding: .22rem 0;
-    color: var(--ink);
+    padding: .16rem 0 .16rem .75rem;
+    border-left: 2px solid transparent;
     border-bottom: 0;
+    color: var(--ink);
   }
-  .identity nav a:hover { color: var(--link); }
-  .identity nav .sub a { padding-left: .9rem; color: var(--ink-soft); font-size: .875rem; }
+  .identity nav a:hover { color: var(--wine); }
+  .identity nav a.is-active {
+    color: var(--wine);
+    border-left-color: var(--wine);
+  }
+  .identity nav .sub a { padding-left: 1.6rem; color: var(--ink-soft); font-size: .9375rem; }
+  .identity nav .sub a.is-active { color: var(--wine); }
 
   .contact {
     border-top: 1px solid var(--rule);
     padding-top: .9rem;
-    font-family: var(--sans);
-    font-size: .875rem;
+    font-size: .9375rem;
   }
-  .contact li { margin-bottom: .3rem; }
   .contact a { border-bottom: 0; color: var(--ink-soft); }
-  .contact a:hover { color: var(--link); }
+  .contact a:hover { color: var(--wine); }
 
   /* ---------- main column ---------- */
 
-  main { min-width: 0; }
-
-  .lede {
-    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
-    line-height: 1.45;
-    font-weight: 300;
-    max-width: 36ch;
-    margin: -.4rem 0 3.5rem;
+  main {
+    min-width: 0;
+    border-left: 1px solid var(--rule);
+    padding-left: clamp(1.75rem, 4vw, 3.25rem);
   }
 
-  section { scroll-margin-top: 2rem; margin-bottom: 3.5rem; }
+  section { scroll-margin-top: 2rem; margin-bottom: 3.25rem; }
+  section:last-of-type { margin-bottom: 2rem; }
 
   .section-title {
-    font-family: var(--sans);
-    font-size: .9375rem;
+    font-size: 1.0625rem;
     font-weight: 500;
-    color: var(--ink-soft);
-    margin: 0 0 1.1rem;
-    padding-bottom: .5rem;
+    letter-spacing: .01em;
+    color: var(--wine);
+    margin: 0 0 1.2rem;
+    padding-bottom: .45rem;
     border-bottom: 1px solid var(--rule);
   }
 
-  .prose { max-width: 62ch; }
+  .prose { max-width: 64ch; }
   .prose p { margin: 0 0 1.1rem; }
   .prose p:last-child { margin-bottom: 0; }
 
+  /* 侘寂 — faint mark down the right edge. Raise or lower --mark-opacity to taste. */
+  .mark {
+    position: fixed;
+    right: clamp(.5rem, 2.5vw, 2rem);
+    bottom: clamp(1rem, 5vh, 3.5rem);
+    z-index: 0;
+    font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-size: clamp(4.5rem, 11vw, 9rem);
+    line-height: 1.05;
+    writing-mode: vertical-rl;
+    color: var(--wine);
+    opacity: var(--mark-opacity);
+    user-select: none;
+    pointer-events: none;
+  }
+
   .subsection-title {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin: 2.25rem 0 .75rem;
+    font-size: 1.3rem;
+    font-style: italic;
+    font-weight: 400;
+    margin: 2.4rem 0 .8rem;
   }
   .subsection-title:first-of-type { margin-top: 0; }
 
@@ -168,58 +190,60 @@
 
   .entries li {
     display: grid;
-    grid-template-columns: 4.5rem 1fr;
+    grid-template-columns: 5rem 1fr;
     gap: 1rem;
-    padding: .9rem 0;
+    padding: .95rem 0;
     border-bottom: 1px solid var(--rule);
   }
   .entries li:first-child { border-top: 1px solid var(--rule); }
 
   .entry-year {
-    font-family: var(--sans);
-    font-size: .8125rem;
+    font-size: .9375rem;
+    font-style: italic;
     color: var(--ink-soft);
-    padding-top: .35rem;
+    padding-top: .15rem;
   }
 
   .entry-title { display: block; font-size: 1.0625rem; line-height: 1.4; }
+  a.entry-title { border-bottom: 0; }
+  a.entry-title:hover { border-bottom: 1px solid var(--wine-deep); }
+
   .entry-meta {
     display: block;
-    font-family: var(--sans);
-    font-size: .8125rem;
+    font-size: .9375rem;
     line-height: 1.55;
     color: var(--ink-soft);
-    margin-top: .2rem;
+    margin-top: .15rem;
   }
   .entry-meta em { font-style: italic; }
 
   .empty {
+    border-left: 2px solid var(--rule);
     background: var(--wash);
-    padding: 1.1rem 1.25rem;
-    max-width: 62ch;
-    font-size: 1rem;
+    padding: 1rem 1.25rem;
+    max-width: 64ch;
+    font-style: italic;
     color: var(--ink-soft);
     margin: 0;
   }
 
   .cv-download {
     display: inline-block;
-    font-family: var(--sans);
-    font-size: .9375rem;
-    margin-top: 1.5rem;
-    padding: .5rem .9rem;
-    border: 1px solid var(--link);
+    font-size: 1rem;
+    margin-top: 1.6rem;
+    padding: .45rem 1rem;
+    border: 1px solid var(--wine);
     border-radius: 2px;
-    color: var(--link);
+    color: var(--wine);
   }
-  .cv-download:hover { background: var(--link); color: var(--paper); }
+  .cv-download:hover { background: var(--wine); color: var(--paper); border-color: var(--wine); }
 
   footer {
     grid-column: 1 / -1;
     border-top: 1px solid var(--rule);
     padding-top: 1rem;
-    font-family: var(--sans);
-    font-size: .8125rem;
+    font-size: .875rem;
+    font-style: italic;
     color: var(--ink-soft);
   }
 
@@ -228,18 +252,21 @@
   @media (max-width: 720px) {
     .shell { grid-template-columns: 1fr; gap: 2.25rem; }
     .identity { position: static; }
-    .portrait { width: 7rem; }
-    .identity-name { font-size: 2.1rem; }
-    .identity nav ul { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+    .portrait { width: 7.5rem; }
+    .identity nav ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+    .identity nav a { padding-left: 0; border-left: 0; }
+    .identity nav a.is-active { border-left: 0; border-bottom: 2px solid var(--wine); }
     .identity nav .sub a { padding-left: 0; }
-    .lede { max-width: none; margin-bottom: 2.5rem; }
-    .entries li { grid-template-columns: 1fr; gap: .15rem; }
+    main { border-left: 0; padding-left: 0; }
+    .entries li { grid-template-columns: 1fr; gap: .1rem; }
     .entry-year { padding-top: 0; }
   }
 </style>
 </head>
 
 <body>
+<div class="mark" aria-hidden="true" lang="ja">侘寂</div>
+
 <div class="shell">
 
   <header class="identity">
@@ -247,6 +274,10 @@
 
     <h1 class="identity-name">Emilio Siciliano</h1>
     <p class="identity-role">PhD student in Economics and Finance<br>Bocconi University, Milan</p>
+
+    <svg class="flourish" viewBox="0 0 60 9" aria-hidden="true">
+      <path d="M1.2 5.4 C12 3.8 25 4.9 37 3.3 C45 2.3 52.5 2.8 59 1.9 L59 3.0 C52.5 3.9 45 3.6 37 4.6 C25 6.1 12 5.2 1.2 6.9 Z"/>
+    </svg>
 
     <nav aria-label="Sections">
       <ul>
@@ -266,8 +297,6 @@
   </header>
 
   <main>
-    <p class="lede">I work on financial markets and the macroeconomy — how information, frictions and investors' perceptions of risk shape asset prices.</p>
-
     <section id="about">
       <h2 class="section-title">About</h2>
       <div class="prose">
@@ -385,5 +414,33 @@
   </footer>
 
 </div>
+
+<script>
+  // Highlights the section you are currently reading in the sidebar navigation.
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.identity nav a'));
+    var targets = links.map(function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var current = 0;
+      for (var i = 0; i < targets.length; i++) {
+        if (targets[i] && targets[i].getBoundingClientRect().top <= 140) current = i;
+      }
+      for (var j = 0; j < links.length; j++) {
+        links[j].classList.toggle('is-active', j === current);
+      }
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+
+    update();
+  })();
+</script>
 </body>
 </html>
