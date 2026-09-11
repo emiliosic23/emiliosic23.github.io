@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--
+  Emilio Siciliano — personal research page.
+  Single file, no build step. Publish by dropping index.html, photo.jpg and cv.pdf
+  into a GitHub repository and enabling Pages.
+
+  To add a paper, see the commented markup pattern inside the "Academic work" section.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emilio Siciliano</title>
+<meta name="description" content="Emilio Siciliano — PhD student in Economics and Finance at Bocconi University. Financial economics, macro-finance and behavioural finance.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:      #f4f5f1;
+    --ink:        #18231f;
+    --ink-soft:   #5a655e;
+    --rule:       #d5d9cf;
+    --link:       #1d5561;
+    --wash:       #eaece4;
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans:  "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--link); text-decoration: none; border-bottom: 1px solid rgba(29,85,97,.3); }
+  a:hover { border-bottom-color: var(--link); }
+  a:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- shell ---------- */
+
+  .shell {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.25rem, 5vw, 3rem);
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  /* ---------- identity column ---------- */
+
+  .identity { position: sticky; top: clamp(2.5rem, 6vw, 5.5rem); }
+
+  .portrait {
+    display: block;
+    width: 8.5rem;
+    height: auto;
+    margin-bottom: 1.1rem;
+    filter: saturate(.92);
+  }
+
+  .identity-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.9rem;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0 0 .4rem;
+  }
+
+  .identity-role {
+    font-family: var(--sans);
+    font-size: .875rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 2rem;
+  }
+
+  .identity nav ul,
+  .contact ul { list-style: none; margin: 0; padding: 0; }
+
+  .identity nav {
+    border-top: 1px solid var(--rule);
+    padding-top: .9rem;
+    margin-bottom: 2rem;
+  }
+
+  .identity nav a {
+    font-family: var(--sans);
+    font-size: .9375rem;
+    display: block;
+    padding: .22rem 0;
+    color: var(--ink);
+    border-bottom: 0;
+  }
+  .identity nav a:hover { color: var(--link); }
+  .identity nav .sub a { padding-left: .9rem; color: var(--ink-soft); font-size: .875rem; }
+
+  .contact {
+    border-top: 1px solid var(--rule);
+    padding-top: .9rem;
+    font-family: var(--sans);
+    font-size: .875rem;
+  }
+  .contact li { margin-bottom: .3rem; }
+  .contact a { border-bottom: 0; color: var(--ink-soft); }
+  .contact a:hover { color: var(--link); }
+
+  /* ---------- main column ---------- */
+
+  main { min-width: 0; }
+
+  .lede {
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    line-height: 1.45;
+    font-weight: 300;
+    max-width: 36ch;
+    margin: -.4rem 0 3.5rem;
+  }
+
+  section { scroll-margin-top: 2rem; margin-bottom: 3.5rem; }
+
+  .section-title {
+    font-family: var(--sans);
+    font-size: .9375rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin: 0 0 1.1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .prose { max-width: 62ch; }
+  .prose p { margin: 0 0 1.1rem; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  .subsection-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 2.25rem 0 .75rem;
+  }
+  .subsection-title:first-of-type { margin-top: 0; }
+
+  /* ---------- entry lists ---------- */
+
+  .entries { list-style: none; margin: 0; padding: 0; }
+
+  .entries li {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1rem;
+    padding: .9rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .entries li:first-child { border-top: 1px solid var(--rule); }
+
+  .entry-year {
+    font-family: var(--sans);
+    font-size: .8125rem;
+    color: var(--ink-soft);
+    padding-top: .35rem;
+  }
+
+  .entry-title { display: block; font-size: 1.0625rem; line-height: 1.4; }
+  .entry-meta {
+    display: block;
+    font-family: var(--sans);
+    font-size: .8125rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-top: .2rem;
+  }
+  .entry-meta em { font-style: italic; }
+
+  .empty {
+    background: var(--wash);
+    padding: 1.1rem 1.25rem;
+    max-width: 62ch;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .cv-download {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: .9375rem;
+    margin-top: 1.5rem;
+    padding: .5rem .9rem;
+    border: 1px solid var(--link);
+    border-radius: 2px;
+    color: var(--link);
+  }
+  .cv-download:hover { background: var(--link); color: var(--paper); }
+
+  footer {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+    font-family: var(--sans);
+    font-size: .8125rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- small screens ---------- */
+
+  @media (max-width: 720px) {
+    .shell { grid-template-columns: 1fr; gap: 2.25rem; }
+    .identity { position: static; }
+    .portrait { width: 7rem; }
+    .identity-name { font-size: 2.1rem; }
+    .identity nav ul { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+    .identity nav .sub a { padding-left: 0; }
+    .lede { max-width: none; margin-bottom: 2.5rem; }
+    .entries li { grid-template-columns: 1fr; gap: .15rem; }
+    .entry-year { padding-top: 0; }
+  }
+</style>
+</head>
+
+<body>
+<div class="shell">
+
+  <header class="identity">
+    <img class="portrait" src="photo.jpg" width="560" height="700" alt="Emilio Siciliano">
+
+    <h1 class="identity-name">Emilio Siciliano</h1>
+    <p class="identity-role">PhD student in Economics and Finance<br>Bocconi University, Milan</p>
+
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li class="sub"><a href="#academic">Academic work</a></li>
+        <li class="sub"><a href="#policy">Policy work</a></li>
+        <li><a href="#cv">CV</a></li>
+      </ul>
+    </nav>
+
+    <div class="contact">
+      <ul>
+        <li><a href="mailto:emilio.siciliano@phd.unibocconi.it">emilio.siciliano@phd.unibocconi.it</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <p class="lede">I work on financial markets and the macroeconomy — how information, frictions and investors' perceptions of risk shape asset prices.</p>
+
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="prose">
+        <p>I am a first-year PhD student in Economics and Finance at Bocconi University, on the Finance curriculum. I hold a BSc in Economics and Finance (2022) and an MSc in Economic and Social Sciences (2025), both from Bocconi.</p>
+        <p>After graduating I worked for a year and a half at the European Central Bank on financial markets and financial stability, and then in the private sector as a macro strategist.</p>
+        <p>My research interests are financial economics, financial markets and the macroeconomy, asset pricing, behavioural finance, informational frictions and monetary policy.</p>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2 class="section-title">Research</h2>
+
+      <h3 class="subsection-title" id="academic">Academic work</h3>
+      <p class="empty">Working papers will be listed here. In the meantime, write to me if you would like to talk about ongoing projects.</p>
+
+      <!--
+        Pattern for a paper — replace the <p class="empty"> above with:
+
+        <ul class="entries">
+          <li>
+            <span class="entry-year">2027</span>
+            <span>
+              <a class="entry-title" href="LINK">Paper title</a>
+              <span class="entry-meta">with Co-author &middot; <em>Journal</em>, forthcoming</span>
+            </span>
+          </li>
+        </ul>
+      -->
+
+      <h3 class="subsection-title" id="policy">Policy work</h3>
+      <ul class="entries">
+        <li>
+          <span class="entry-year">Nov 2025</span>
+          <span>
+            <a class="entry-title" href="https://www.ecb.europa.eu/press/financial-stability-publications/fsr/special/html/ecb.fsrart202511_01~fdf147a04a.en.html">What safe haven after the April US tariff announcement? Implications for euro area financial stability</a>
+            <span class="entry-meta">Special Feature, <em>ECB Financial Stability Review</em>. With P. A. Baudino, M. Grothe, M. M. Habib, A.-S. Manu, P. McQuade, M. Ricci, T. Tomov, L. Tondo and G. Watfe</span>
+          </span>
+        </li>
+        <li>
+          <span class="entry-year">May 2025</span>
+          <span>
+            <a class="entry-title" href="https://www.ecb.europa.eu/press/financial-stability-publications/fsr/focus/2025/html/ecb.fsrbox202505_02~7f616fcd3f.en.html">What does the record price of gold tell us about risk perceptions in financial markets?</a>
+            <span class="entry-meta">Box, <em>ECB Financial Stability Review</em>. With M. M. Habib, O. Schwartz Blicke and J. Wendelborn</span>
+          </span>
+        </li>
+        <li>
+          <span class="entry-year">Nov 2024</span>
+          <span>
+            <a class="entry-title" href="https://www.ecb.europa.eu/press/financial-stability-publications/fsr/focus/2024/html/ecb.fsrbox202411_03~87408e7fb3.en.html">Passive investing and its impact on return co-movement, market concentration and liquidity in euro area equity markets</a>
+            <span class="entry-meta">Box, <em>ECB Financial Stability Review</em>. With D. Dieckelmann and A. Sowiński</span>
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="cv">
+      <h2 class="section-title">CV</h2>
+
+      <h3 class="subsection-title">Positions</h3>
+      <ul class="entries">
+        <li>
+          <span class="entry-year">2026–</span>
+          <span>
+            <span class="entry-title">PhD student in Economics and Finance</span>
+            <span class="entry-meta">Bocconi University, Milan</span>
+          </span>
+        </li>
+        <li>
+          <span class="entry-year">2025–26</span>
+          <span>
+            <span class="entry-title">Macro Credit Strategy</span>
+            <span class="entry-meta">NatWest Markets, London. European sovereign bond and macro-credit research</span>
+          </span>
+        </li>
+        <li>
+          <span class="entry-year">2025</span>
+          <span>
+            <span class="entry-title">Financial Stability Analyst</span>
+            <span class="entry-meta">European Central Bank, Frankfurt am Main. Euro area bond market liquidity and risk identification</span>
+          </span>
+        </li>
+        <li>
+          <span class="entry-year">2024–25</span>
+          <span>
+            <span class="entry-title">Financial Stability Trainee</span>
+            <span class="entry-meta">European Central Bank, Frankfurt am Main. Market efficiency and investors' risk perception</span>
+          </span>
+        </li>
+      </ul>
+
+      <h3 class="subsection-title">Education</h3>
+      <ul class="entries">
+        <li>
+          <span class="entry-year">2025</span>
+          <span>
+            <span class="entry-title">MSc in Economic and Social Sciences</span>
+            <span class="entry-meta">Bocconi University, 110/110. Thesis: <em>News surprises and euro area sovereign bonds: an empirical analysis</em>. Advisor: Luigi Iovino</span>
+          </span>
+        </li>
+        <li>
+          <span class="entry-year">2022</span>
+          <span>
+            <span class="entry-title">BSc in Economics and Finance</span>
+            <span class="entry-meta">Bocconi University, 109/110. Thesis: <em>Sacrifice ratio and monetary institutions: OECD countries, 1960–1990</em>. Advisor: Donato Masciandaro</span>
+          </span>
+        </li>
+      </ul>
+
+      <a class="cv-download" href="cv.pdf">Download full CV (PDF)</a>
+    </section>
+  </main>
+
+  <footer>
+    Updated September 2026
+  </footer>
+
+</div>
+</body>
+</html>
