@@ -75,9 +75,9 @@
 
   .portrait {
     display: block;
-    width: 9rem;
+    width: 100%;
     height: auto;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.4rem;
     border: 1px solid var(--rule);
     filter: saturate(.9);
   }
@@ -252,7 +252,7 @@
   @media (max-width: 720px) {
     .shell { grid-template-columns: 1fr; gap: 2.25rem; }
     .identity { position: static; }
-    .portrait { width: 7.5rem; }
+    .portrait { width: 10rem; }
     .identity nav ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
     .identity nav a { padding-left: 0; border-left: 0; }
     .identity nav a.is-active { border-left: 0; border-bottom: 2px solid var(--wine); }
@@ -270,7 +270,7 @@
 <div class="shell">
 
   <header class="identity">
-    <img class="portrait" src="photo.jpg" width="560" height="700" alt="Emilio Siciliano">
+    <img class="portrait" src="photo.jpg" width="720" height="900" alt="Emilio Siciliano">
 
     <h1 class="identity-name">Emilio Siciliano</h1>
     <p class="identity-role">PhD student in Economics and Finance<br>Bocconi University, Milan</p>
@@ -302,7 +302,7 @@
       <div class="prose">
         <p>I am a first-year PhD student in Economics and Finance at Bocconi University, on the Finance curriculum. I hold a BSc in Economics and Finance (2022) and an MSc in Economic and Social Sciences (2025), both from Bocconi.</p>
         <p>After graduating I worked for a year and a half at the European Central Bank on financial markets and financial stability, and then in the private sector as a macro strategist.</p>
-        <p>My research interests are financial economics, financial markets and the macroeconomy, asset pricing, behavioural finance, informational frictions and monetary policy.</p>
+        <p>My research interests are financial economics, macro-finance, asset pricing and behavioural finance.</p>
       </div>
     </section>
 
